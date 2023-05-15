@@ -26,7 +26,7 @@ function Page2(): JSX.Element {
       try {
         setProgress(true);
         const res = await axios.get('/api/fetch-address');
-        const address:string = res.data;
+        const address: string = res.data;
         console.log(address);
         setAdminAddress(address);
         setSnackbarSeverity('success');

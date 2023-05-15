@@ -12,15 +12,12 @@ function Page5(): JSX.Element {
   const [openLeftDrawer, setOpenLeftDrawer] = useState<boolean>(false); //LeftDrawerの設定
 
   //SSS共通設定
-  const { clientPublicKey,sssState } = useSssInit();
+  const { clientPublicKey, sssState } = useSssInit();
   const [clientAddress, setClientAddress] = useState<string>('');
   useEffect(() => {
-    if(sssState === 'ACTIVE'){
-      const clientPublicAccount = PublicAccount.createFromPublicKey(
-        clientPublicKey,
-        networkType
-      )  
-      setClientAddress(clientPublicAccount.address.plain())
+    if (sssState === 'ACTIVE') {
+      const clientPublicAccount = PublicAccount.createFromPublicKey(clientPublicKey, networkType);
+      setClientAddress(clientPublicAccount.address.plain());
     }
   }, [clientPublicKey, sssState]);
 

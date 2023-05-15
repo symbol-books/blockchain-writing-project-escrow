@@ -8,6 +8,7 @@ import { PublicAccount, TransactionStatus } from 'symbol-sdk';
 import useSssInit from '@/hooks/useSssInit';
 import { networkType } from '@/consts/blockchainProperty';
 import { sendMessageWithSSS } from '@/utils/sendMessageWithSSS';
+import { useRouter } from 'next/router';
 
 function Page6(): JSX.Element {
   //共通設定
@@ -18,19 +19,19 @@ function Page6(): JSX.Element {
   const [snackbarMessage, setSnackbarMessage] = useState<string>(''); //AlertsSnackbarの設定
   const [dialogTitle, setDialogTitle] = useState<string>(''); //AlertsDialogの設定(共通)
   const [dialogMessage, setDialogMessage] = useState<string>(''); //AlertsDialogの設定(共通)
+  const router = useRouter();
 
   //SSS共通設定
-  const { clientPublicKey,sssState } = useSssInit();
+  const { clientPublicKey, sssState } = useSssInit();
   const [clientAddress, setClientAddress] = useState<string>('');
   useEffect(() => {
-    if(sssState === 'ACTIVE'){
-      const clientPublicAccount = PublicAccount.createFromPublicKey(
-        clientPublicKey,
-        networkType
-      )  
-      setClientAddress(clientPublicAccount.address.plain())
+    if (sssState === 'ACTIVE') {
+      const clientPublicAccount = PublicAccount.createFromPublicKey(clientPublicKey, networkType);
+      setClientAddress(clientPublicAccount.address.plain());
+    } else if (sssState === 'INACTIVE' || sssState === 'NONE') {
+      router.push('/page5');
     }
-  }, [clientPublicKey, sssState]);
+  }, [clientPublicKey, sssState, router]);
 
   //ページ個別設定
   const [hash, setHash] = useState<string>('');
@@ -38,7 +39,9 @@ function Page6(): JSX.Element {
   const handleAgreeClickSendMessage = async () => {
     try {
       setProgress(true);
-      const transactionStatus: TransactionStatus | undefined = await sendMessageWithSSS(clientAddress);
+      const transactionStatus: TransactionStatus | undefined = await sendMessageWithSSS(
+        clientAddress
+      );
       if (transactionStatus === undefined) {
         setSnackbarSeverity('error');
         setSnackbarMessage('NODEの接続に失敗しました');

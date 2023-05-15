@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 
 //SSS用設定
 interface SSSWindow extends Window {
-  SSS: any
-  isAllowedSSS: () => boolean
+  SSS: any;
+  isAllowedSSS: () => boolean;
 }
-declare const window: SSSWindow
+declare const window: SSSWindow;
 
 const useSssInit = () => {
   const [sssState, setSssState] = useState<'ACTIVE' | 'INACTIVE' | 'NONE' | 'LOADING'>('LOADING');
   const [clientPublicKey, setClientPublicKey] = useState<string>('');
-  
+
   useEffect(() => {
     setTimeout(() => {
       try {
@@ -27,8 +27,8 @@ const useSssInit = () => {
       }
     }, 200); // SSSのプログラムがwindowに挿入されるよりも後に実行するために遅らせる
   }, []);
-  
-  return { clientPublicKey,sssState };
+
+  return { clientPublicKey, sssState };
 };
 
 export default useSssInit;

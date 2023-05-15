@@ -16,12 +16,12 @@ import axios from 'axios';
 
 //SSS用設定
 interface SSSWindow extends Window {
-  SSS: any
+  SSS: any;
 }
-declare const window: SSSWindow
+declare const window: SSSWindow;
 
 export const sendMessageWithSSS = async (
-  clientAddress: string,
+  clientAddress: string
 ): Promise<TransactionStatus | undefined> => {
   const NODE = await connectNode(nodeList);
   if (NODE === '') return undefined;
@@ -40,7 +40,7 @@ export const sendMessageWithSSS = async (
   const clientAddressAccount = Address.createFromRawAddress(clientAddress);
 
   const res = await axios.get('/api/fetch-address');
-  const adminAddress:string = res.data;
+  const adminAddress: string = res.data;
 
   const tx = TransferTransaction.create(
     Deadline.create(epochAdjustment),
@@ -50,10 +50,10 @@ export const sendMessageWithSSS = async (
     networkType
   ).setMaxFee(100);
 
-  window.SSS.setTransaction(tx)
-  const signedTx:SignedTransaction = await new Promise((resolve) => {
+  window.SSS.setTransaction(tx);
+  const signedTx: SignedTransaction = await new Promise((resolve) => {
     resolve(window.SSS.requestSign());
-  })
+  });
   await firstValueFrom(txRepo.announce(signedTx));
   await listener.open();
   const transactionStatus: TransactionStatus = await new Promise((resolve) => {
@@ -74,5 +74,3 @@ export const sendMessageWithSSS = async (
   });
   return transactionStatus;
 };
-
-

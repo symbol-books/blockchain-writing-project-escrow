@@ -13,7 +13,7 @@ import { nodeList } from '@/consts/nodeList';
 import axios from 'axios';
 
 export const sendMessage = async (
-  clientPrivateKey: string,
+  clientPrivateKey: string
 ): Promise<TransactionStatus | undefined> => {
   const NODE = await connectNode(nodeList);
   if (NODE === '') return undefined;
@@ -32,7 +32,7 @@ export const sendMessage = async (
   const client = Account.createFromPrivateKey(clientPrivateKey, networkType);
 
   const res = await axios.get('/api/fetch-address');
-  const adminAddress:string = res.data;
+  const adminAddress: string = res.data;
 
   const tx = TransferTransaction.create(
     Deadline.create(epochAdjustment),

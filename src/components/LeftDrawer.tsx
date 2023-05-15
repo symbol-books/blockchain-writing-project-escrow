@@ -10,12 +10,7 @@ import {
   ListItemText,
 } from '@mui/material';
 import Home from '@mui/icons-material/Home';
-import LooksOneIcon from '@mui/icons-material/LooksOne';
-import LooksTwoIcon from '@mui/icons-material/LooksTwo';
-import Looks3Icon from '@mui/icons-material/Looks3';
-import Looks4Icon from '@mui/icons-material/Looks4';
-import Looks5Icon from '@mui/icons-material/Looks5';
-import Looks6Icon from '@mui/icons-material/Looks6';
+import HandshakeIcon from '@mui/icons-material/Handshake';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
@@ -64,89 +59,14 @@ function LeftDrawer(props: {
             <ListItem disablePadding>
               <ListItemButton
                 onClick={() => {
-                  router.push('/page1');
+                  router.push('/escrow-request');
                   setOpenLeftDrawer(false);
                 }}
               >
                 <ListItemIcon>
-                  <LooksOneIcon />
+                  <HandshakeIcon />
                 </ListItemIcon>
-                <ListItemText primary={'アカウント作成'} />
-              </ListItemButton>
-            </ListItem>
-          </List>
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton
-                onClick={() => {
-                  router.push('/page2');
-                  setOpenLeftDrawer(false);
-                }}
-              >
-                <ListItemIcon>
-                  <LooksTwoIcon />
-                </ListItemIcon>
-                <ListItemText primary={'管理者側アドレス確認'} />
-              </ListItemButton>
-            </ListItem>
-          </List>
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton
-                onClick={() => {
-                  router.push('/page3');
-                  setOpenLeftDrawer(false);
-                }}
-              >
-                <ListItemIcon>
-                  <Looks3Icon />
-                </ListItemIcon>
-                <ListItemText primary={'管理者から送信'} />
-              </ListItemButton>
-            </ListItem>
-          </List>
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton
-                onClick={() => {
-                  router.push('/page4');
-                  setOpenLeftDrawer(false);
-                }}
-              >
-                <ListItemIcon>
-                  <Looks4Icon />
-                </ListItemIcon>
-                <ListItemText primary={'クライアントから送信'} />
-              </ListItemButton>
-            </ListItem>
-          </List>
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton
-                onClick={() => {
-                  router.push('/page5');
-                  setOpenLeftDrawer(false);
-                }}
-              >
-                <ListItemIcon>
-                  <Looks5Icon />
-                </ListItemIcon>
-                <ListItemText primary={'SSS連携'} />
-              </ListItemButton>
-            </ListItem>
-          </List>
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton
-                onClick={() => {
-                  router.push('/page6');
-                  setOpenLeftDrawer(false);
-                }}
-              >
-                <ListItemIcon>
-                  <Looks6Icon />
-                </ListItemIcon>
-                <ListItemText primary={'SSSでクライアントから送信'} />
+                <ListItemText primary={'取引要求'} />
               </ListItemButton>
             </ListItem>
           </List>

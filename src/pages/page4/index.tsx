@@ -33,9 +33,7 @@ function Page4(): JSX.Element {
     }
     try {
       setProgress(true);
-      const transactionStatus: TransactionStatus | undefined = await sendMessage(
-        clientPrivateKey
-      );
+      const transactionStatus: TransactionStatus | undefined = await sendMessage(clientPrivateKey);
       if (transactionStatus === undefined) {
         setSnackbarSeverity('error');
         setSnackbarMessage('NODEの接続に失敗しました');
