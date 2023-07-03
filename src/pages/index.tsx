@@ -118,104 +118,109 @@ function Home(): JSX.Element {
                   src='/static/images/avatar/1.jpg'
                 />
               </ListItemAvatar>
-              <ListItemText
-                primary='要求中'
-                secondary={
-                  <>
-                    <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-                      <Box width={100}>
-                        <Typography
-                          sx={{ marginRight: 2 }}
-                          component='div'
-                          variant='body2'
-                          color='text.primary'
-                        >
-                          メッセージ
-                        </Typography>
-                      </Box>
-                      {'めちゃくちゃほしいです。ぜひ交換お願いします'}
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-                      <Box width={100}>
-                        <Typography
-                          sx={{ marginRight: 2 }}
-                          component='div'
-                          variant='body2'
-                          color='text.primary'
-                        >
-                          取引期限
-                        </Typography>
-                      </Box>
-                      {'2021/10/10 10:10:10'}
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-                      <Box width={100}>
-                        <Typography
-                          sx={{ marginRight: 2 }}
-                          component='div'
-                          variant='body2'
-                          color='text.primary'
-                        >
-                          モザイクID
-                        </Typography>
-                      </Box>
-                      {'69601B95CF27C9C3'}
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-                      <Box width={100}>
-                        <Typography
-                          sx={{ marginRight: 2 }}
-                          component='div'
-                          variant='body2'
-                          color='text.primary'
-                        >
-                          枚数
-                        </Typography>
-                      </Box>
-                      {'1枚'}
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-                      <Box width={100}>
-                        <Typography
-                          sx={{ marginRight: 2 }}
-                          component='div'
-                          variant='body2'
-                          color='text.primary'
-                        >
-                          取引価格
-                        </Typography>
-                      </Box>
-                      {'400xym'}
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-                      <Box width={100}>
-                        <Typography
-                          sx={{ marginRight: 2 }}
-                          component='div'
-                          variant='body2'
-                          color='text.primary'
-                        >
-                          ハッシュ値
-                        </Typography>
-                      </Box>
+              <Box display='flex' justifyContent='start' flexDirection='column'>
+                <Typography
+                  sx={{ marginRight: 2 }}
+                  component='div'
+                  variant='body2'
+                  color='text.primary'
+                >
+                  要求中
+                </Typography>
+                <Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <Box width={100}>
                       <Typography
                         sx={{ marginRight: 2 }}
                         component='div'
-                        variant='caption'
+                        variant='body2'
                         color='text.primary'
-                        onClick={() => {
-                          window.open(
-                            `https://testnet.symbol.fyi/transactions/${'0FCCAED8BC13BFC62465F1501D857E8C3FE99DBBA3FA31A99EE6DDB6F2130E79'}`,
-                            '_blank'
-                          );
-                        }}
                       >
-                        {'0FCCAED8BC13BFC62465F1501D857E8C3FE99DBBA3FA31A99EE6DDB6F2130E79'}
+                        メッセージ
                       </Typography>
                     </Box>
-                  </>
-                }
-              />
+                    {'めちゃくちゃほしいです。ぜひ交換お願いします'}
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <Box width={100}>
+                      <Typography
+                        sx={{ marginRight: 2 }}
+                        component='div'
+                        variant='body2'
+                        color='text.primary'
+                      >
+                        取引期限
+                      </Typography>
+                    </Box>
+                    {'2021/10/10 10:10:10'}
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <Box width={100}>
+                      <Typography
+                        sx={{ marginRight: 2 }}
+                        component='div'
+                        variant='body2'
+                        color='text.primary'
+                      >
+                        モザイクID
+                      </Typography>
+                    </Box>
+                    {'69601B95CF27C9C3'}
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <Box width={100}>
+                      <Typography
+                        sx={{ marginRight: 2 }}
+                        component='div'
+                        variant='body2'
+                        color='text.primary'
+                      >
+                        枚数
+                      </Typography>
+                    </Box>
+                    {'1枚'}
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <Box width={100}>
+                      <Typography
+                        sx={{ marginRight: 2 }}
+                        component='div'
+                        variant='body2'
+                        color='text.primary'
+                      >
+                        取引価格
+                      </Typography>
+                    </Box>
+                    {'400xym'}
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                    <Box width={100}>
+                      <Typography
+                        sx={{ marginRight: 2 }}
+                        component='div'
+                        variant='body2'
+                        color='text.primary'
+                      >
+                        ハッシュ値
+                      </Typography>
+                    </Box>
+                    <Typography
+                      sx={{ marginRight: 2 }}
+                      component='div'
+                      variant='caption'
+                      color='text.primary'
+                      onClick={() => {
+                        window.open(
+                          `https://testnet.symbol.fyi/transactions/${'0FCCAED8BC13BFC62465F1501D857E8C3FE99DBBA3FA31A99EE6DDB6F2130E79'}`,
+                          '_blank'
+                        );
+                      }}
+                    >
+                      {'0FCCAED8BC13BFC62465F1501D857E8C3FE99DBBA3FA31A99EE6DDB6F2130E79'}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
             </ListItem>
             <Divider variant='inset' component='li' />
           </List>
