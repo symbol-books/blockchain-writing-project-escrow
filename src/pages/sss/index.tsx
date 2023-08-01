@@ -6,7 +6,7 @@ import { PublicAccount } from 'symbol-sdk';
 import { networkType } from '@/consts/blockchainProperty';
 import useSssInit from '@/hooks/useSssInit';
 
-function Page5(): JSX.Element {
+function Sss(): JSX.Element {
   //共通設定
   const [progress, setProgress] = useState<boolean>(false); //ローディングの設定
   const [openLeftDrawer, setOpenLeftDrawer] = useState<boolean>(false); //LeftDrawerの設定
@@ -69,4 +69,4 @@ function Page5(): JSX.Element {
     </>
   );
 }
-export default Page5;
+export default Sss;

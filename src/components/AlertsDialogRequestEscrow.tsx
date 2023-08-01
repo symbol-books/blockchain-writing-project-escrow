@@ -7,11 +7,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { EscrowRequestInputs } from '@/types/escrowRequestInputs';
 
-function AlertsDialogEscrowRequest(props: {
+function AlertsDialogRequestEscrow(props: {
   openDialog: boolean;
   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
   handleAgreeClick: () => void;
-  escrowRequestInputsData:EscrowRequestInputs;
+  escrowRequestInputsData: EscrowRequestInputs;
 }): JSX.Element {
   const { openDialog, setOpenDialog, handleAgreeClick, escrowRequestInputsData } = props;
 
@@ -26,18 +26,11 @@ function AlertsDialogEscrowRequest(props: {
       >
         <DialogTitle>{`取引内容の確認`}</DialogTitle>
         <DialogContent>
-          <Stack
-            spacing={2}
-            sx={{ m: 2}}
-          >
+          <Stack spacing={2} sx={{ m: 2 }}>
             <DialogContentText>{`以下内容で取引を開始しますか？`}</DialogContentText>
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               <Box width={100}>
-                <Typography
-                  sx={{ marginRight: 2 }}
-                  component='div'
-                  variant='caption'
-                >
+                <Typography sx={{ marginRight: 2 }} component='div' variant='caption'>
                   取引内容
                 </Typography>
               </Box>
@@ -47,11 +40,7 @@ function AlertsDialogEscrowRequest(props: {
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               <Box width={100}>
-                <Typography
-                  sx={{ marginRight: 2 }}
-                  component='div'
-                  variant='caption'
-                >
+                <Typography sx={{ marginRight: 2 }} component='div' variant='caption'>
                   宛先アドレス
                 </Typography>
               </Box>
@@ -61,40 +50,28 @@ function AlertsDialogEscrowRequest(props: {
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               <Box width={100}>
-                <Typography
-                  sx={{ marginRight: 2 }}
-                  component='div'
-                  variant='caption'
-                >
-                  メッセージ
+                <Typography sx={{ marginRight: 2 }} component='div' variant='caption'>
+                  公開メッセージ
                 </Typography>
               </Box>
               <Typography component='div' variant='caption'>
                 {`${escrowRequestInputsData.message}`}
               </Typography>
             </Box>
-            <Divider/>
+            <Divider />
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               <Box width={100}>
-                <Typography
-                  sx={{ marginRight: 2 }}
-                  component='div'
-                  variant='caption'
-                >
+                <Typography sx={{ marginRight: 2 }} component='div' variant='caption'>
                   運営手数料
                 </Typography>
               </Box>
               <Typography component='div' variant='caption'>
-                {`${escrowRequestInputsData.amount*0.1}xym (取引価格の10%)`}
+                {`${escrowRequestInputsData.amount * 0.1}xym (取引価格の10%)`}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               <Box width={100}>
-                <Typography
-                  sx={{ marginRight: 2 }}
-                  component='div'
-                  variant='caption'
-                >
+                <Typography sx={{ marginRight: 2 }} component='div' variant='caption'>
                   ネットワーク手数料
                 </Typography>
               </Box>
@@ -102,33 +79,29 @@ function AlertsDialogEscrowRequest(props: {
                 {`10xym(デポジット手数料*1) + α(トランザクション手数料*2)`}
               </Typography>
             </Box>
-            <Divider/>
+            <Divider />
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               <Box width={100}>
-                <Typography
-                  sx={{ marginRight: 2 }}
-                  component='div'
-                  variant='caption'
-                >
+                <Typography sx={{ marginRight: 2 }} component='div' variant='caption'>
                   合計
                 </Typography>
               </Box>
               <Typography component='div' variant='caption'>
-                {`${escrowRequestInputsData.amount*(1+0.1)+10} + α xym`}
+                {`${escrowRequestInputsData.amount * (1 + 0.1) + 10} + α xym`}
               </Typography>
             </Box>
             <Typography component='div' variant='caption'>
-                {`*1 ブロックチェーン上でを取引を行うための手数料です。取引成功時に返金されます。ただし48時間以内に取引が完了しなかった場合は返金されません。`}
-              </Typography>
-              <Typography component='div' variant='caption'>
-                {`*2 ブロックチェーン上にデータを書き込むための手数料です。実際に署名する際に右上に表示されます。`}
-              </Typography>
-              <Typography component='div' variant='caption'>
-                {`*3 一度署名を行うとキャンセルすることはできません。`}
-              </Typography>
-              <Typography component='div' variant='caption'>
-                {`*4 署名は続けて二回行います。一回目は取引に対する署名、二回目は取引をブロックチェーン上でロック(HASH_LOCK)しておくための署名です。`}
-              </Typography>
+              {`*1 ブロックチェーン上でを取引を行うための手数料です。取引成功時に返金されます。ただし48時間以内に取引が完了しなかった場合は返金されません。`}
+            </Typography>
+            <Typography component='div' variant='caption'>
+              {`*2 ブロックチェーン上にデータを書き込むための手数料です。実際に署名する際に右上に表示されます。`}
+            </Typography>
+            <Typography component='div' variant='caption'>
+              {`*3 一度署名を行うとキャンセルすることはできません。`}
+            </Typography>
+            <Typography component='div' variant='caption'>
+              {`*4 署名は続けて二回行います。一回目は取引に対する署名、二回目は取引をブロックチェーン上でロック(HASH_LOCK)しておくための署名です。`}
+            </Typography>
           </Stack>
         </DialogContent>
         <DialogActions>
@@ -143,4 +116,4 @@ function AlertsDialogEscrowRequest(props: {
     </Dialog>
   );
 }
-export default AlertsDialogEscrowRequest;
+export default AlertsDialogRequestEscrow;

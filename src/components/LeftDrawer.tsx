@@ -10,7 +10,8 @@ import {
   ListItemText,
 } from '@mui/material';
 import Home from '@mui/icons-material/Home';
-import HandshakeIcon from '@mui/icons-material/Handshake';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import HistoryIcon from '@mui/icons-material/History';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
@@ -59,17 +60,32 @@ function LeftDrawer(props: {
             <ListItem disablePadding>
               <ListItemButton
                 onClick={() => {
-                  router.push('/escrow-request');
+                  router.push('/escrow');
                   setOpenLeftDrawer(false);
                 }}
               >
                 <ListItemIcon>
-                  <HandshakeIcon />
+                  <ArrowCircleUpIcon />
                 </ListItemIcon>
                 <ListItemText primary={'取引要求'} />
               </ListItemButton>
             </ListItem>
           </List>
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => {
+                  router.push('/history');
+                  setOpenLeftDrawer(false);
+                }}
+              >
+                <ListItemIcon>
+                  <HistoryIcon />
+                </ListItemIcon>
+                <ListItemText primary={'取引履歴'} />
+              </ListItemButton>
+            </ListItem>
+          </List>{' '}
         </Box>
       </Drawer>
     </>

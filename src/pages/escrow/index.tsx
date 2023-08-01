@@ -15,12 +15,11 @@ import {
 import { PublicAccount, TransactionStatus } from 'symbol-sdk';
 import useSssInit from '@/hooks/useSssInit';
 import { networkType } from '@/consts/blockchainProperty';
-import { sendMessageWithSSS } from '@/utils/sendMessageWithSSS';
 import { useRouter } from 'next/router';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { EscrowRequestInputs } from '@/types/escrowRequestInputs';
-import AlertsDialogEscrowRequest from '@/components/AlertsDialogEscrowRequest';
-import { escrowRequestWithSSS } from '@/utils/escrowRequestWithSSS';
+import AlertsDialogRequestEscrow from '@/components/AlertsDialogRequestEscrow';
+import { requestEscrowWithSSS } from '@/utils/requestEscrowWithSSS';
 
 function EscrowRequest(): JSX.Element {
   //共通設定
@@ -51,7 +50,7 @@ function EscrowRequest(): JSX.Element {
     handleSubmit,
     formState: { errors },
   } = useForm<EscrowRequestInputs>({
-    defaultValues: { targetAddress: '' ,mosaicId:'',amount:1,price:1,message:''},
+    defaultValues: { targetAddress: '', mosaicId: '', amount: 1, price: 1, message: '' },
   });
 
   const validationRules = {
@@ -59,50 +58,47 @@ function EscrowRequest(): JSX.Element {
       required: '宛先アドレスを入力して下さい',
       pattern: {
         value: /^([A-Z0-9]{39,39})$/,
-        message: '正しいアドレスのフォーマットではありません'
-      }
+        message: '正しいアドレスのフォーマットではありません',
+      },
     },
     mosaicId: {
       required: 'モザイクIDを入力して下さい',
       pattern: {
         value: /^([A-Z0-9]{16,16})$/,
-        message: '正しいモザイクIDのフォーマットではありません'
-      }
+        message: '正しいモザイクIDのフォーマットではありません',
+      },
     },
     amount: {
       required: '数量を入力して下さい',
       validate: {
-        nonZero: (value:number) =>
-        value > 0 || '数量には0より多い数値を入力して下さい',
-      },    
+        nonZero: (value: number) => value > 0 || '数量には0より多い数値を入力して下さい',
+      },
     },
     price: {
       required: '取引価格を指定して下さい',
       validate: {
-        nonZero: (value:number) =>
-        value > 0 || '取引価格は0より多い数値を入力して下さい',
-      },    
+        nonZero: (value: number) => value > 0 || '取引価格は0より多い数値を入力して下さい',
+      },
     },
     message: {
       maxLength: {
         value: 300,
-        message: 'メッセージは３００文字以内にして下さい',
-      },    
+        message: '公開メッセージは３００文字以内にして下さい',
+      },
     },
   };
 
-  const onSubmit: SubmitHandler<EscrowRequestInputs> = (data: EscrowRequestInputs) => {
-    setInputData(data);
-    setOpenDialogSendMessage(true);
+  const onSubmit: SubmitHandler<EscrowRequestInputs> = (inputData: EscrowRequestInputs) => {
+    setInputData(inputData);
+    setOpenDialog(true);
   };
 
-  const [hash, setHash] = useState<string>('');
-  const [openDialogSendMessage, setOpenDialogSendMessage] = useState<boolean>(false); //AlertsDialogの設定(個別)
-  const handleAgreeClickSendMessage = async () => {
+  const [openDialog, setOpenDialog] = useState<boolean>(false); //AlertsDialogの設定(個別)
+  const handleAgreeClick = async () => {
     console.log(inputData);
     try {
       setProgress(true);
-      const transactionStatus: TransactionStatus | undefined = await escrowRequestWithSSS(
+      const transactionStatus: TransactionStatus | undefined = await requestEscrowWithSSS(
         clientAddress,
         inputData!.targetAddress,
         inputData!.mosaicId,
@@ -115,7 +111,6 @@ function EscrowRequest(): JSX.Element {
         setSnackbarMessage('NODEの接続に失敗しました');
         setOpenSnackbar(true);
       } else if (transactionStatus.code === 'Success') {
-        setHash(transactionStatus.hash);
         setSnackbarSeverity('success');
         setSnackbarMessage(`${transactionStatus.group} TXを検知しました`);
         setOpenSnackbar(true);
@@ -141,14 +136,18 @@ function EscrowRequest(): JSX.Element {
         snackbarSeverity={snackbarSeverity}
         snackbarMessage={snackbarMessage}
       />
-      <AlertsDialogEscrowRequest
-        openDialog={openDialogSendMessage}
-        setOpenDialog={setOpenDialogSendMessage}
+      <AlertsDialogRequestEscrow
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
         handleAgreeClick={() => {
-          handleAgreeClickSendMessage();
-          setOpenDialogSendMessage(false);
+          handleAgreeClick();
+          setOpenDialog(false);
         }}
-        escrowRequestInputsData={inputData?inputData:{targetAddress:'',mosaicId:'',amount:1,price:1,message:''}}
+        escrowRequestInputsData={
+          inputData
+            ? inputData
+            : { targetAddress: '', mosaicId: '', amount: 1, price: 1, message: '' }
+        }
       />
       {progress ? (
         <Backdrop open={progress}>
@@ -156,7 +155,7 @@ function EscrowRequest(): JSX.Element {
         </Backdrop>
       ) : (
         <Box
-          sx={{ p: 3 }}
+          p={3}
           display='flex'
           alignItems='center'
           justifyContent='center'
@@ -224,8 +223,8 @@ function EscrowRequest(): JSX.Element {
                   type='text'
                   label='取引価格'
                   InputProps={{
-                    endAdornment: <InputAdornment position="end">xym</InputAdornment>,
-                  }}               
+                    endAdornment: <InputAdornment position='end'>xym</InputAdornment>,
+                  }}
                   error={errors.price !== undefined}
                   helperText={errors.price?.message}
                 />
@@ -240,7 +239,7 @@ function EscrowRequest(): JSX.Element {
                   {...field}
                   multiline
                   type='text'
-                  label='メッセージ'
+                  label='公開メッセージ'
                   error={errors.message !== undefined}
                   helperText={errors.message?.message}
                 />

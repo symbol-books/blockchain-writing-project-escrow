@@ -12,20 +12,18 @@ const useSssInit = () => {
   const [clientPublicKey, setClientPublicKey] = useState<string>('');
 
   useEffect(() => {
-    setTimeout(() => {
-      try {
-        if (window.isAllowedSSS()) {
-          setSssState('ACTIVE');
-          const publicKey = window.SSS.activePublicKey;
-          setClientPublicKey(publicKey);
-        } else {
-          setSssState('INACTIVE');
-        }
-      } catch (e) {
-        console.error(e);
-        setSssState('NONE');
+    try {
+      if (window.isAllowedSSS()) {
+        setSssState('ACTIVE');
+        const publicKey = window.SSS.activePublicKey;
+        setClientPublicKey(publicKey);
+      } else {
+        setSssState('INACTIVE');
       }
-    }, 200); // SSSのプログラムがwindowに挿入されるよりも後に実行するために遅らせる
+    } catch (e) {
+      console.error(e);
+      setSssState('NONE');
+    }
   }, []);
 
   return { clientPublicKey, sssState };

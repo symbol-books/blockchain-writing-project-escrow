@@ -7,10 +7,10 @@ import useSssInit from '@/hooks/useSssInit';
 import { networkType } from '@/consts/blockchainProperty';
 import { useRouter } from 'next/router';
 import { searchEscrow } from '@/utils/searchEscrow';
-import CardEscrowPartial from '@/components/CardEscrowPartial';
+import CardEscrowConfirmed from '@/components/CardEscrowConfirmed';
 import { escrowAggregateTransaction } from '@/types/escrowAggregateTransaction';
 
-function Home(): JSX.Element {
+function History(): JSX.Element {
   //共通設定
   const [progress, setProgress] = useState<boolean>(true); //ローディングの設定
   const [openLeftDrawer, setOpenLeftDrawer] = useState<boolean>(false); //LeftDrawerの設定
@@ -38,7 +38,7 @@ function Home(): JSX.Element {
   }, [clientAddress, sssState]);
 
   const initalescrowDataList = async () => {
-    const result = await searchEscrow(clientAddress, TransactionGroup.Partial);
+    const result = await searchEscrow(clientAddress, TransactionGroup.Confirmed);
     if (result === undefined) return;
     setescrowDataList(result);
   };
@@ -60,12 +60,12 @@ function Home(): JSX.Element {
           flexDirection='column'
         >
           <Typography component='div' variant='h6' mt={5} mb={1}>
-            取引一覧
+            取引履歴
           </Typography>
 
           {escrowDataList.map((escrowData, index) => (
             <Box key={index} mb={1}>
-              <CardEscrowPartial
+              <CardEscrowConfirmed
                 key={index}
                 clientAddress={clientAddress}
                 escrowData={escrowData}
@@ -77,4 +77,4 @@ function Home(): JSX.Element {
     </>
   );
 }
-export default Home;
+export default History;
